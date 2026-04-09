@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews — The Club Multiple</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+.review-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:1.8rem;
+  transition:all 0.3s; display:flex; flex-direction:column;
+}
+.review-card:hover { border-color:rgba(255,69,0,0.3); transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,0.4); }
+.stars { color:#FF8C00; letter-spacing:2px; font-size:1rem; }
+.star-btn { background:none; border:none; font-size:1.8rem; cursor:pointer; line-height:1; transition:transform 0.1s; color:rgba(255,255,255,0.2); }
+.star-btn:hover, .star-btn.lit { color:#FF8C00; }
+.star-btn:active { transform:scale(1.3); }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-line"></div>
+  <div class="container">
+    <p class="tag anim-fade-up">What Members Say</p>
+    <h1 class="display anim-fade-up" style="font-size:clamp(3rem,8vw,7rem);animation-delay:0.15s;">
+      REAL <span class="grad-text">RESULTS,</span><br>REAL PEOPLE.
+    </h1>
+  </div>
+</div>
+
+<!-- OVERALL RATING -->
+<section class="section-sm" style="background:var(--surface);border-bottom:1px solid var(--border);">
+  <div class="container reveal">
+    <div style="display:grid;grid-template-columns:auto 1fr auto;gap:3rem;align-items:center;max-width:800px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Anton',sans-serif;font-size:5rem;line-height:1;" class="grad-text">4.9</div>
+        <div class="stars">★★★★★</div>
+        <div style="font-size:0.75rem;color:var(--dimmed);margin-top:0.3rem;">Based on 120+ reviews</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.5rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.85rem;">
+          <span style="color:var(--muted);width:20px;">5★</span>
+          <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:999px;height:8px;overflow:hidden;">
+            <div style="width:92%;height:100%;background:var(--grad);border-radius:999px;"></div>
+          </div>
+          <span style="color:var(--dimmed);">92%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.85rem;">
+          <span style="color:var(--muted);width:20px;">4★</span>
+          <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:999px;height:8px;overflow:hidden;">
+            <div style="width:6%;height:100%;background:var(--grad);border-radius:999px;"></div>
+          </div>
+          <span style="color:var(--dimmed);">6%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.85rem;">
+          <span style="color:var(--muted);width:20px;">3★</span>
+          <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:999px;height:8px;overflow:hidden;">
+            <div style="width:2%;height:100%;background:var(--grad);border-radius:999px;"></div>
+          </div>
+          <span style="color:var(--dimmed);">2%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.85rem;">
+          <span style="color:var(--muted);width:20px;">2★</span>
+          <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:999px;height:8px;"></div>
+          <span style="color:var(--dimmed);">0%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.85rem;">
+          <span style="color:var(--muted);width:20px;">1★</span>
+          <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:999px;height:8px;"></div>
+          <span style="color:var(--dimmed);">0%</span>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="openModal('reviewModal')">
+        Write a Review
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS GRID -->
+<section class="section">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2.5rem;" class="reveal">
+      <h2 class="section-title" style="font-size:2rem;margin-bottom:0;">MEMBER <span class="grad-text">STORIES</span></h2>
+      <select style="background:var(--card);border:1px solid var(--border);color:var(--white);padding:0.5rem 1rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.85rem;">
+        <option>Most Recent</option>
+        <option>Highest Rated</option>
+      </select>
+    </div>
+
+    <!-- Pinned / Featured Review -->
+    <div class="glass reveal" style="padding:2.5rem;margin-bottom:1.5rem;border-radius:var(--radius-lg);position:relative;overflow:hidden;">
+      <div style="position:absolute;top:1rem;right:1.5rem;"><span class="badge badge-orange">Featured</span></div>
+      <div style="font-family:'Anton',sans-serif;font-size:4rem;color:rgba(255,69,0,0.08);line-height:1;position:absolute;top:0;left:1.5rem;">"</div>
+      <div class="stars" style="margin-bottom:1rem;">★★★★★</div>
+      <p style="font-size:1.05rem;line-height:1.85;color:var(--white);margin-bottom:1.5rem;font-style:italic;position:relative;">"I've been training at The Club Multiple for 8 months now and the transformation has been incredible. The trainers actually care about your progress — Rahul redesigned my entire program when I hit a plateau and I've been hitting PRs every month since. Best gym in Silicon Indore, hands down."</p>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,69,0,0.15);border:1px solid rgba(255,69,0,0.3);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;color:var(--orange);">KP</div>
+        <div>
+          <div style="font-weight:500;">Karan Patel</div>
+          <div style="font-size:0.78rem;color:var(--dimmed);">Annual Member · January 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;" id="reviews-grid">
+
+      <div class="review-card reveal reveal-delay-1">
+        <div class="stars" style="margin-bottom:0.8rem;">★★★★★</div>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.75;flex:1;margin-bottom:1.2rem;">"The yoga sessions with Priya are something else. I started for flexibility but I keep coming back for the mental clarity it gives me. Amazing coach, amazing facility."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;border-top:1px solid var(--border);padding-top:1rem;">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,69,0,0.1);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:0.9rem;color:var(--orange);">NS</div>
+          <div>
+            <div style="font-size:0.88rem;font-weight:500;">Neha Sharma</div>
+            <div style="font-size:0.73rem;color:var(--dimmed);">Quarterly · March 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-2">
+        <div class="stars" style="margin-bottom:0.8rem;">★★★★★</div>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.75;flex:1;margin-bottom:1.2rem;">"Arjun's HIIT classes are brutal in the best way possible. Lost 8 kgs in 3 months. The energy in those sessions is unmatched. 100% recommend to anyone serious about fat loss."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;border-top:1px solid var(--border);padding-top:1rem;">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,69,0,0.1);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:0.9rem;color:var(--orange);">RT</div>
+          <div>
+            <div style="font-size:0.88rem;font-weight:500;">Rohan Tiwari</div>
+            <div style="font-size:0.73rem;color:var(--dimmed);">Annual · February 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-3">
+        <div class="stars" style="margin-bottom:0.8rem;">★★★★★</div>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.75;flex:1;margin-bottom:1.2rem;">"Clean, spacious, great equipment. Never felt crowded even during peak hours. The staff is friendly and the trainers are very approachable. Great value for money."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;border-top:1px solid var(--border);padding-top:1rem;">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,69,0,0.1);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:0.9rem;color:var(--orange);">AG</div>
+          <div>
+            <div style="font-size:0.88rem;font-weight:500;">Anjali Gupta</div>
+            <div style="font-size:0.73rem;color:var(--dimmed);">Monthly · April 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-1">
+        <div class="stars" style="margin-bottom:0.8rem;">★★★★★</div>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.75;flex:1;margin-bottom:1.2rem;">"Switched from another gym in Indore and the difference is night and day. Equipment is maintained properly, environment is motivating, and the personalised coaching is worth every rupee."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;border-top:1px solid var(--border);padding-top:1rem;">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,69,0,0.1);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:0.9rem;color:var(--orange);">VK</div>
+          <div>
+            <div style="font-size:0.88rem;font-weight:500;">Vivek Khatri</div>
+            <div style="font-size:0.73rem;color:var(--dimmed);">Quarterly · March 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-2">
+        <div class="stars" style="margin-bottom:0.8rem;">★★★★★</div>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.75;flex:1;margin-bottom:1.2rem;">"Vikram's nutrition plan combined with my training literally changed my life. Down 12 kgs and feeling stronger than ever. This isn't just a gym, it's a lifestyle upgrade."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;border-top:1px solid var(--border);padding-top:1rem;">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,69,0,0.1);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:0.9rem;color:var(--orange);">PM</div>
+          <div>
+            <div style="font-size:0.88rem;font-weight:500;">Pooja Malhotra</div>
+            <div style="font-size:0.73rem;color:var(--dimmed);">Annual · January 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Write a review card -->
+      <div class="card reveal reveal-delay-3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:200px;border-style:dashed;cursor:pointer;" onclick="openModal('reviewModal')">
+        <div style="font-size:2rem;color:var(--orange);margin-bottom:0.75rem;">✏️</div>
+        <p style="font-weight:500;margin-bottom:0.4rem;">Share Your Experience</p>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1rem;">Help others discover The Club Multiple</p>
+        <span class="btn btn-ghost" style="font-size:0.75rem;padding:0.55rem 1.2rem;">Write a Review →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEW MODAL -->
+<div class="modal-overlay" id="reviewModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('reviewModal')">✕</button>
+    <div id="review-form-view">
+      <p class="tag">Share Your Experience</p>
+      <h2 style="font-family:'Anton',sans-serif;font-size:1.8rem;margin-bottom:1.5rem;">LEAVE A REVIEW</h2>
+
+      <div class="field-group">
+        <label>Your Rating</label>
+        <div style="display:flex;gap:0.5rem;" id="star-row">
+          <button class="star-btn" onclick="setRating(1)">★</button>
+          <button class="star-btn" onclick="setRating(2)">★</button>
+          <button class="star-btn" onclick="setRating(3)">★</button>
+          <button class="star-btn" onclick="setRating(4)">★</button>
+          <button class="star-btn" onclick="setRating(5)">★</button>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Full Name</label>
+        <input type="text" id="r-name" placeholder="Your name" />
+      </div>
+      <div class="field-group">
+        <label>Membership Plan</label>
+        <select id="r-plan">
+          <option value="">Select your plan</option>
+          <option>Monthly Member</option>
+          <option>Quarterly Member</option>
+          <option>Annual Member</option>
+          <option>Just Visited</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Your Review</label>
+        <textarea id="r-body" rows="4" placeholder="Tell others about your experience at The Club Multiple..."></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="submitReview()">Submit Review</button>
+    </div>
+    <div class="success-screen" id="review-success-view">
+      <div class="success-icon">✓</div>
+      <h3 style="font-family:'Anton',sans-serif;font-size:2rem;margin-bottom:0.5rem;">THANK YOU!</h3>
+      <p style="color:var(--muted);">Your review has been submitted.<br>We appreciate you taking the time to share your experience.</p>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="/js/components.js"></script>
+<script>
+initPage('reviews');
+
+let rating = 0;
+function setRating(n) {
+  rating = n;
+  document.querySelectorAll('.star-btn').forEach((btn, i) => {
+    btn.classList.toggle('lit', i < n);
+  });
+}
+
+function submitReview() {
+  const name = document.getElementById('r-name').value.trim();
+  const plan = document.getElementById('r-plan').value;
+  const body = document.getElementById('r-body').value.trim();
+  if (!rating) { alert('Please select a star rating.'); return; }
+  if (!name)   { alert('Please enter your name.'); return; }
+  if (!plan)   { alert('Please select your membership plan.'); return; }
+  if (body.length < 20) { alert('Please write at least 20 characters in your review.'); return; }
+  // In production, POST this to your server / database
+  document.getElementById('review-form-view').style.display = 'none';
+  document.getElementById('review-success-view').style.display = 'block';
+}
+
+document.getElementById('reviewModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal('reviewModal');
+});
+</script>
+</body>
+</html>

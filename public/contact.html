@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — The Club Multiple</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+.map-wrap {
+  border-radius:var(--radius-lg); overflow:hidden;
+  border:1px solid var(--border); height:100%; min-height:400px;
+  background:var(--card); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:1.2rem; position:relative;
+}
+.map-grid-bg {
+  position:absolute; inset:0;
+  background-image:linear-gradient(rgba(255,69,0,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,69,0,0.05) 1px,transparent 1px);
+  background-size:36px 36px;
+}
+.map-pin {
+  width:20px; height:20px; border-radius:50% 50% 50% 0;
+  background:var(--orange); transform:rotate(-45deg);
+  animation:pulse 2s infinite;
+}
+.info-row { display:flex; gap:1rem; align-items:flex-start; padding:1.2rem 0; border-bottom:1px solid var(--border); }
+.info-row:last-child { border-bottom:none; }
+.info-icon { width:40px; height:40px; border-radius:10px; background:rgba(255,69,0,0.1); border:1px solid rgba(255,69,0,0.2); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+.info-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:0.3rem; }
+.info-val { font-size:0.9rem; color:var(--muted); line-height:1.65; }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-line"></div>
+  <div class="container">
+    <p class="tag anim-fade-up">Get In Touch</p>
+    <h1 class="display anim-fade-up" style="font-size:clamp(3rem,8vw,7rem);animation-delay:0.15s;">
+      COME IN.<br><span class="grad-text">GET TO WORK.</span>
+    </h1>
+  </div>
+</div>
+
+<!-- CONTACT CONTENT -->
+<section class="section">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+
+    <!-- Left: Info + Map -->
+    <div>
+      <div class="reveal">
+        <p class="tag">Find Us</p>
+        <h2 class="section-title" style="font-size:2.5rem;margin-bottom:2rem;">LOCATION &amp;<br><span class="grad-text">HOURS</span></h2>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Address</div>
+            <div class="info-val">32-33, Sector-D, Hasanji Nagar<br>Silicon Indore, Rau — 453331<br>Near Emerald Heights School, MP</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🕐</div>
+          <div>
+            <div class="info-label">Hours</div>
+            <div class="info-val">Monday – Saturday: 6:00 AM – 10:00 PM<br>Sunday: 8:00 AM – 2:00 PM</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Phone</div>
+            <div class="info-val">+91 98765 XXXXX</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">✉️</div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-val">info@theclubmultiple.com</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="map-wrap reveal reveal-delay-2" style="margin-top:2rem;min-height:280px;">
+        <div class="map-grid-bg"></div>
+        <div class="map-pin"></div>
+        <div style="text-align:center;z-index:1;">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.75rem;">32-33 Sector-D, Hasanji Nagar<br>Silicon Indore, Rau — 453331</p>
+          <a href="https://maps.google.com/?q=The+Club+Multiple+Silicon+Indore" target="_blank" class="btn btn-primary" style="font-size:0.75rem;padding:0.65rem 1.4rem;">
+            Open in Google Maps
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Contact Form -->
+    <div class="reveal reveal-delay-2">
+      <p class="tag">Drop Us a Message</p>
+      <h2 class="section-title" style="font-size:2.5rem;margin-bottom:2rem;">SEND US A <span class="grad-text">MESSAGE</span></h2>
+
+      <div id="contact-form">
+        <div class="field-group">
+          <label>Full Name</label>
+          <input type="text" id="c-name" placeholder="Your full name" />
+        </div>
+        <div class="field-group">
+          <label>Phone Number</label>
+          <div class="phone-wrap">
+            <div class="phone-prefix">🇮🇳 +91</div>
+            <input type="tel" id="c-phone" placeholder="98765 43210" maxlength="10" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Email Address</label>
+          <input type="email" id="c-email" placeholder="yourname@email.com" />
+        </div>
+        <div class="field-group">
+          <label>Subject</label>
+          <select id="c-subject">
+            <option value="">What's this about?</option>
+            <option>Membership Enquiry</option>
+            <option>Personal Training</option>
+            <option>Group Classes</option>
+            <option>Nutrition Coaching</option>
+            <option>General Question</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Message</label>
+          <textarea id="c-message" rows="4" placeholder="Tell us how we can help..."></textarea>
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="submitContact()">
+          Send Message
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+
+      <div id="contact-success" style="display:none;text-align:center;padding:3rem 0;">
+        <div class="success-icon" style="margin:0 auto 1.5rem;">✓</div>
+        <h3 style="font-family:'Anton',sans-serif;font-size:2rem;margin-bottom:0.5rem;">MESSAGE SENT!</h3>
+        <p style="color:var(--muted);">We'll get back to you within 24 hours.<br>See you at the gym! 💪</p>
+        <button class="btn btn-ghost" style="margin-top:1.5rem;" onclick="resetContact()">Send Another</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK LINKS BAR -->
+<section class="section-sm" style="background:var(--surface);border-top:1px solid var(--border);" class="reveal">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;">
+      <a href="/membership.html" class="card" style="text-align:center;text-decoration:none;">
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;">💳</div>
+        <div style="font-family:'Anton',sans-serif;font-size:1rem;margin-bottom:0.3rem;">Join Today</div>
+        <div style="font-size:0.8rem;color:var(--muted);">View all plans</div>
+      </a>
+      <a href="/gallery.html" class="card" style="text-align:center;text-decoration:none;">
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;">📸</div>
+        <div style="font-family:'Anton',sans-serif;font-size:1rem;margin-bottom:0.3rem;">Gallery</div>
+        <div style="font-size:0.8rem;color:var(--muted);">See the facility</div>
+      </a>
+      <a href="/reviews.html" class="card" style="text-align:center;text-decoration:none;">
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;">⭐</div>
+        <div style="font-family:'Anton',sans-serif;font-size:1rem;margin-bottom:0.3rem;">Reviews</div>
+        <div style="font-size:0.8rem;color:var(--muted);">What members say</div>
+      </a>
+      <a href="/about.html" class="card" style="text-align:center;text-decoration:none;">
+        <div style="font-size:1.8rem;margin-bottom:0.75rem;">🏋️</div>
+        <div style="font-family:'Anton',sans-serif;font-size:1rem;margin-bottom:0.3rem;">Our Team</div>
+        <div style="font-size:0.8rem;color:var(--muted);">Meet the trainers</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="/js/components.js"></script>
+<script>
+initPage('contact');
+
+function submitContact() {
+  const name    = document.getElementById('c-name').value.trim();
+  const phone   = document.getElementById('c-phone').value.trim();
+  const email   = document.getElementById('c-email').value.trim();
+  const subject = document.getElementById('c-subject').value;
+  const message = document.getElementById('c-message').value.trim();
+  if (!name)    { alert('Please enter your name.'); return; }
+  if (!phone || phone.length < 10) { alert('Please enter a valid 10-digit phone number.'); return; }
+  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+  if (!subject) { alert('Please select a subject.'); return; }
+  if (message.length < 10) { alert('Please write a brief message.'); return; }
+  // POST to server in production
+  document.getElementById('contact-form').style.display    = 'none';
+  document.getElementById('contact-success').style.display = 'block';
+}
+
+function resetContact() {
+  document.getElementById('contact-form').style.display    = 'block';
+  document.getElementById('contact-success').style.display = 'none';
+  ['c-name','c-phone','c-email','c-message'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('c-subject').value = '';
+}
+</script>
+</body>
+</html>
