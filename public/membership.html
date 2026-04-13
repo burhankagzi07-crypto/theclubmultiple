@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership — The Club Multiple</title>
+<link rel="stylesheet" href="/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Razorpay SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+.plan-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:2.2rem;position:relative;transition:all 0.28s;display:flex;flex-direction:column;}
+.plan-card:hover{border-color:rgba(255,69,0,0.32);transform:translateY(-5px);box-shadow:0 18px 50px rgba(0,0,0,0.5);}
+.plan-card.featured{border-color:var(--orange);box-shadow:0 0 0 1px rgba(255,69,0,0.18),0 18px 50px rgba(255,69,0,0.08);}
+.plan-features{list-style:none;flex:1;}
+.plan-features li{display:flex;align-items:center;gap:0.7rem;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.88rem;color:var(--muted);}
+.plan-features li::before{content:'';width:6px;height:6px;background:var(--orange);border-radius:50%;flex-shrink:0;}
+.faq-body{font-size:0.88rem;color:var(--muted);line-height:1.8;}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-line"></div>
+  <div class="container">
+    <p class="tag anim-fade-up">Choose Your Plan</p>
+    <h1 class="display anim-fade-up" style="font-size:clamp(2.8rem,8vw,6.5rem);animation-delay:0.15s;">
+      YOUR <span class="grad-text">COMMITMENT,</span><br>YOUR PACE.
+    </h1>
+  </div>
+</div>
+
+<!-- PLANS -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center;max-width:520px;margin:0 auto 3rem;" class="reveal">
+      <p class="tag">Membership Plans</p>
+      <h2 class="section-title">SIMPLE. <span class="grad-text">TRANSPARENT.</span></h2>
+      <p style="color:var(--muted);font-size:0.95rem;">No hidden fees. No lock-in surprises. Just great fitness at a fair price.</p>
+    </div>
+
+    <div class="grid-3">
+      <!-- Monthly -->
+      <div class="plan-card reveal reveal-delay-1">
+        <p style="font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);margin-bottom:0.5rem;">Monthly</p>
+        <div style="display:flex;align-items:baseline;gap:0.3rem;margin-bottom:0.3rem;">
+          <span style="font-family:'Anton',sans-serif;font-size:3rem;line-height:1;">₹1,200</span>
+          <span style="color:var(--muted);font-size:0.88rem;">/ month</span>
+        </div>
+        <p style="color:var(--dimmed);font-size:0.78rem;margin-bottom:1.3rem;">No long-term commitment</p>
+        <div style="height:1px;background:var(--border);margin-bottom:1.3rem;"></div>
+        <ul class="plan-features" style="margin-bottom:1.8rem;">
+          <li>Full gym floor access</li>
+          <li>Locker room access</li>
+          <li>Cardio & weights</li>
+          <li>2 group classes / month</li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="openJoin('monthly')">Get Started</button>
+      </div>
+
+      <!-- Quarterly (featured) -->
+      <div class="plan-card featured reveal reveal-delay-2">
+        <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--grad);padding:0.3rem 1.1rem;border-radius:0 0 8px 8px;font-size:0.62rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#fff;white-space:nowrap;">Most Popular</div>
+        <p style="font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);margin-bottom:0.5rem;margin-top:0.4rem;">Quarterly</p>
+        <div style="display:flex;align-items:baseline;gap:0.3rem;margin-bottom:0.3rem;">
+          <span style="font-family:'Anton',sans-serif;font-size:3rem;line-height:1;">₹3,000</span>
+          <span style="color:var(--muted);font-size:0.88rem;">/ 3 months</span>
+        </div>
+        <p style="color:var(--dimmed);font-size:0.78rem;margin-bottom:1.3rem;">Save ₹600 vs monthly</p>
+        <div style="height:1px;background:rgba(255,69,0,0.2);margin-bottom:1.3rem;"></div>
+        <ul class="plan-features" style="margin-bottom:1.8rem;">
+          <li>Full gym floor access</li>
+          <li>Locker room access</li>
+          <li>Unlimited group classes</li>
+          <li>1 free PT session</li>
+          <li>Nutrition consultation</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="openJoin('quarterly')">Get Started</button>
+      </div>
+
+      <!-- Annual -->
+      <div class="plan-card reveal reveal-delay-3">
+        <p style="font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);margin-bottom:0.5rem;">Annual</p>
+        <div style="display:flex;align-items:baseline;gap:0.3rem;margin-bottom:0.3rem;">
+          <span style="font-family:'Anton',sans-serif;font-size:3rem;line-height:1;">₹9,600</span>
+          <span style="color:var(--muted);font-size:0.88rem;">/ year</span>
+        </div>
+        <p style="color:var(--dimmed);font-size:0.78rem;margin-bottom:1.3rem;">Best value — 2 months free</p>
+        <div style="height:1px;background:var(--border);margin-bottom:1.3rem;"></div>
+        <ul class="plan-features" style="margin-bottom:1.8rem;">
+          <li>Full gym floor access</li>
+          <li>Unlimited group classes</li>
+          <li>4 free PT sessions</li>
+          <li>Monthly nutrition check-in</li>
+          <li>Priority batch booking</li>
+          <li>Guest passes (2 / month)</li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="openJoin('annual')">Get Started</button>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div style="margin-top:4.5rem;" class="reveal">
+      <div style="text-align:center;margin-bottom:2.5rem;">
+        <p class="tag">Got Questions?</p>
+        <h2 class="section-title" style="font-size:clamp(1.8rem,4vw,3rem);">FAQ</h2>
+      </div>
+      <div style="max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:0.75rem;">
+        <div class="glass" style="border-radius:10px;overflow:hidden;">
+          <button onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem;background:none;border:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;cursor:pointer;gap:1rem;">
+            Can I freeze my membership? <span style="color:var(--orange);font-size:1.2rem;transition:transform 0.2s;flex-shrink:0;">+</span>
+          </button>
+          <div style="display:none;padding:0 1.4rem 1.1rem;" class="faq-body">Yes — up to 30 days per year. Speak to front desk staff to freeze your membership at any time.</div>
+        </div>
+        <div class="glass" style="border-radius:10px;overflow:hidden;">
+          <button onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem;background:none;border:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;cursor:pointer;gap:1rem;">
+            Is there a joining fee? <span style="color:var(--orange);font-size:1.2rem;transition:transform 0.2s;flex-shrink:0;">+</span>
+          </button>
+          <div style="display:none;padding:0 1.4rem 1.1rem;" class="faq-body">No joining or registration fee. You only pay the membership amount listed above.</div>
+        </div>
+        <div class="glass" style="border-radius:10px;overflow:hidden;">
+          <button onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem;background:none;border:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;cursor:pointer;gap:1rem;">
+            What payment methods are accepted? <span style="color:var(--orange);font-size:1.2rem;transition:transform 0.2s;flex-shrink:0;">+</span>
+          </button>
+          <div style="display:none;padding:0 1.4rem 1.1rem;" class="faq-body">Online payments via Razorpay (UPI, cards, net banking, wallets), UPI manual transfer, or cash at the gym.</div>
+        </div>
+        <div class="glass" style="border-radius:10px;overflow:hidden;">
+          <button onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem;background:none;border:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;cursor:pointer;gap:1rem;">
+            Can I bring a guest? <span style="color:var(--orange);font-size:1.2rem;transition:transform 0.2s;flex-shrink:0;">+</span>
+          </button>
+          <div style="display:none;padding:0 1.4rem 1.1rem;" class="faq-body">Annual members get 2 guest passes per month. Day passes for guests are available at the front desk for other plans.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN MODAL -->
+<div class="modal-overlay" id="joinModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('joinModal')">✕</button>
+
+    <!-- FORM -->
+    <div id="form-view">
+      <p style="font-size:0.62rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--orange);margin-bottom:0.4rem;" id="m-tag">Membership</p>
+      <h2 style="font-family:'Anton',sans-serif;font-size:1.9rem;margin-bottom:0.3rem;" id="m-name">JOIN THE CLUB</h2>
+      <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1.3rem;" id="m-price"></p>
+      <div style="height:1px;background:rgba(255,69,0,0.14);margin-bottom:1.3rem;"></div>
+
+      <div class="field-group">
+        <label>Full Name</label>
+        <input type="text" id="f-name" placeholder="Your full name" autocomplete="name" />
+      </div>
+      <div class="field-group">
+        <label>Phone Number</label>
+        <div class="phone-wrap">
+          <div class="phone-prefix">🇮🇳 +91</div>
+          <input type="tel" id="f-phone" placeholder="98765 43210" maxlength="10" inputmode="numeric" />
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Email Address</label>
+        <input type="email" id="f-email" placeholder="yourname@email.com" autocomplete="email" />
+      </div>
+      <div class="field-group">
+        <label>Fitness Goal</label>
+        <select id="f-goal">
+          <option value="">Select your primary goal</option>
+          <option>Weight Loss</option>
+          <option>Muscle Gain</option>
+          <option>General Fitness</option>
+          <option>Strength Training</option>
+          <option>Yoga & Flexibility</option>
+        </select>
+      </div>
+
+      <p style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.7rem;">Payment Method</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;margin-bottom:1rem;">
+        <div class="pay-opt" id="opt-razorpay" onclick="selectPay('razorpay')">
+          <div style="font-family:'Anton',sans-serif;font-size:0.85rem;letter-spacing:0.05em;margin-bottom:0.2rem;color:var(--white);">Online</div>
+          <div style="font-size:0.68rem;color:var(--muted);">Card / UPI / Net</div>
+        </div>
+        <div class="pay-opt" id="opt-upi" onclick="selectPay('upi')">
+          <div style="font-family:'Anton',sans-serif;font-size:0.85rem;letter-spacing:0.05em;margin-bottom:0.2rem;color:var(--white);">UPI</div>
+          <div style="font-size:0.68rem;color:var(--muted);">Manual transfer</div>
+        </div>
+        <div class="pay-opt" id="opt-visit" onclick="selectPay('visit')">
+          <div style="font-family:'Anton',sans-serif;font-size:0.85rem;letter-spacing:0.05em;margin-bottom:0.2rem;color:var(--white);">Walk In</div>
+          <div style="font-size:0.68rem;color:var(--muted);">Pay at gym</div>
+        </div>
+      </div>
+      <div id="upi-detail" style="display:none;background:rgba(255,255,255,0.03);border:1px solid rgba(255,69,0,0.14);border-radius:8px;padding:0.9rem 1rem;margin-bottom:1rem;font-size:0.84rem;color:var(--muted);">
+        Send to UPI ID: <strong style="color:var(--orange);font-size:0.95rem;">theclubmultiple@upi</strong><br>
+        <span style="font-size:0.72rem;color:var(--dimmed);display:block;margin-top:0.35rem;">Screenshot payment and show at reception on first visit.</span>
+      </div>
+
+      <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" id="submit-btn" onclick="submitJoin()">
+        Confirm Membership
+      </button>
+      <p style="font-size:0.72rem;color:var(--dimmed);text-align:center;margin-top:0.7rem;">🔒 Secured by Razorpay • 256-bit SSL</p>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="success-view">
+      <div class="success-icon">✓</div>
+      <h3 style="font-family:'Anton',sans-serif;font-size:2rem;margin-bottom:0.4rem;">YOU'RE IN!</h3>
+      <p style="color:var(--muted);font-size:0.88rem;margin-bottom:1.4rem;">Confirmation sent to <strong style="color:var(--orange);" id="s-email"></strong></p>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:left;overflow:hidden;margin-bottom:1.3rem;">
+        <div style="background:rgba(255,69,0,0.08);padding:0.7rem 1.1rem;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);">Membership Card</div>
+        <div style="padding:0.5rem 1.1rem;">
+          <div style="display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.82rem;"><span style="color:var(--dimmed);">ID</span><strong style="color:var(--orange);" id="s-id"></strong></div>
+          <div style="display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.82rem;"><span style="color:var(--dimmed);">Member</span><span id="s-name"></span></div>
+          <div style="display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.82rem;"><span style="color:var(--dimmed);">Plan</span><span style="color:var(--orange);" id="s-plan"></span></div>
+          <div style="display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.82rem;"><span style="color:var(--dimmed);">Amount</span><span id="s-amount"></span></div>
+          <div style="display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.82rem;"><span style="color:var(--dimmed);">Starts</span><span style="color:#4ade80;" id="s-start"></span></div>
+          <div style="display:flex;justify-content:space-between;padding:0.45rem 0;font-size:0.82rem;"><span style="color:var(--dimmed);">Expires</span><strong style="color:var(--orange);" id="s-end"></strong></div>
+        </div>
+      </div>
+      <p style="color:var(--dimmed);font-size:0.78rem;">32-33 Sector-D, Hasanji Nagar, Silicon Indore<br>Opens 6 AM daily — See you on the floor! 💪</p>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="/js/components.js"></script>
+<script>
+initPage('membership');
+
+const PLANS = {
+  monthly:   { tag:'Monthly Plan',   name:'MONTHLY MEMBERSHIP',   price:'₹1,200 / month',        amount:'₹1,200',  paise:120000,  months:1  },
+  quarterly: { tag:'Quarterly Plan', name:'QUARTERLY MEMBERSHIP', price:'₹3,000 / 3 months',      amount:'₹3,000',  paise:300000,  months:3  },
+  annual:    { tag:'Annual Plan',    name:'ANNUAL MEMBERSHIP',    price:'₹9,600 / year',           amount:'₹9,600',  paise:960000,  months:12 },
+};
+
+let currentPlan = '';
+let payMethod   = '';
+
+function openJoin(key) {
+  currentPlan = key;
+  const p = PLANS[key];
+  document.getElementById('m-tag').textContent   = p.tag;
+  document.getElementById('m-name').textContent  = p.name;
+  document.getElementById('m-price').textContent = p.price;
+  document.getElementById('form-view').style.display    = 'block';
+  document.getElementById('success-view').style.display = 'none';
+  document.getElementById('upi-detail').style.display   = 'none';
+  document.querySelectorAll('.pay-opt').forEach(e => e.classList.remove('selected'));
+  payMethod = '';
+  ['f-name','f-phone','f-email','f-goal'].forEach(id => document.getElementById(id).value = '');
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = 'Confirm Membership'; btn.disabled = false;
+  openModal('joinModal');
+}
+
+function selectPay(t) {
+  payMethod = t;
+  document.querySelectorAll('.pay-opt').forEach(e => e.classList.remove('selected'));
+  document.getElementById('opt-' + t).classList.add('selected');
+  document.getElementById('upi-detail').style.display = t === 'upi' ? 'block' : 'none';
+}
+
+async function submitJoin() {
+  const name  = document.getElementById('f-name').value.trim();
+  const raw   = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const goal  = document.getElementById('f-goal').value;
+  if (!name)  { alert('Please enter your full name.'); return; }
+  if (!raw || raw.replace(/\D/g,'').length < 10) { alert('Please enter a valid 10-digit phone number.'); return; }
+  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+  if (!goal)  { alert('Please select your fitness goal.'); return; }
+  if (!payMethod) { alert('Please choose a payment method.'); return; }
+
+  const phone = '+91 ' + raw;
+  const plan  = PLANS[currentPlan];
+  const btn   = document.getElementById('submit-btn');
+  const start = new Date();
+  const end   = new Date(); end.setMonth(end.getMonth() + plan.months);
+
+  btn.textContent = 'Processing...'; btn.disabled = true;
+
+  try {
+    let result;
+
+    if (payMethod === 'razorpay') {
+      // Launch Razorpay checkout
+      result = await startRazorpayPayment({
+        amount:   plan.paise,
+        planName: plan.tag, planKey: currentPlan, months: plan.months,
+        name, email, phone, goal,
+      });
+    } else {
+      // UPI / Walk-in
+      result = await sendConfirmationEmails({
+        name, email, phone, goal,
+        planName: plan.tag, planKey: currentPlan, months: plan.months,
+        amount: plan.amount, amountPaise: plan.paise,
+        paymentMode: payMethod === 'upi' ? 'UPI (Manual)' : 'Walk-in / Cash',
+      });
+    }
+
+    // Show success
+    document.getElementById('form-view').style.display    = 'none';
+    document.getElementById('success-view').style.display = 'block';
+    document.getElementById('s-email').textContent   = email;
+    document.getElementById('s-id').textContent      = result.membershipId || 'TCM-PENDING';
+    document.getElementById('s-name').textContent    = name;
+    document.getElementById('s-plan').textContent    = plan.tag;
+    document.getElementById('s-amount').textContent  = plan.amount;
+    document.getElementById('s-start').textContent   = formatDate(start);
+    document.getElementById('s-end').textContent     = formatDate(end);
+  } catch(e) {
+    alert(e.message || 'Something went wrong. Please try again.');
+    btn.textContent = 'Confirm Membership'; btn.disabled = false;
+  }
+}
+
+function toggleFaq(btn) {
+  const body = btn.nextElementSibling;
+  const icon = btn.querySelector('span');
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  icon.style.transform = open ? 'rotate(0)' : 'rotate(45deg)';
+}
+
+document.getElementById('joinModal').addEventListener('click', function(e){
+  if (e.target === this) closeModal('joinModal');
+});
+</script>
+</body>
+</html>
